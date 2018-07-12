@@ -1,0 +1,17 @@
+﻿<DockPanel x:Class="BetterImageTagEditor.TagPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BetterImageTagEditor"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="240">
+    <TextBlock DockPanel.Dock="Bottom" Background="DarkGray" Foreground="WhiteSmoke" Margin="0,2,3,0" Text="{Binding AutoCompleteText}"/>
+    <DockPanel DockPanel.Dock="Bottom">
+        <Button Name="NewTagType" DockPanel.Dock="Right" Content="{Binding CurrentTagTypeString}" ToolTip="{Binding CurrentTagTypeTooltip}" Background="{Binding CurrentTagTypeColour}" Foreground="WhiteSmoke" Width="32" Height="24" Click="NewTagType_Click"/>
+        <Button Name="NewTagConfirm" DockPanel.Dock="Right" Content="+" Width="32" Height="24" Click="NewTagConfirm_Click"/>
+        <TextBox Name="NewTagName" DockPanel.Dock="Left" Padding="4,0,0,0" FontSize="14" CharacterCasing="Lower" VerticalContentAlignment="Center" Foreground="DarkSlateGray" Background="WhiteSmoke" BorderBrush="SlateGray" PreviewKeyDown="NewTagName_PreviewKeyDown" TextChanged="NewTagName_TextChanged"/>
+    </DockPanel>
+    <Button Name="ImportTags" DockPanel.Dock="Bottom" Content="Import tags" Click="ImportTags_Click"/>
+    <ListBox Name="TagList" DockPanel.Dock="Top" FontSize="14" HorizontalContentAlignment="Stretch" Foreground="WhiteSmoke" Background="Transparent" BorderBrush="Transparent" SelectionMode="Extended"/>
+</DockPanel>

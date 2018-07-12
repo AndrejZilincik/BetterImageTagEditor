@@ -1,0 +1,53 @@
+﻿<DockPanel x:Class="BetterImageTagEditor.SourcesPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BetterImageTagEditor"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel.Resources>
+        <SolidColorBrush x:Key="TransRed" Color="#14C80000"/>
+        <SolidColorBrush x:Key="TransGreen" Color="#1400C800"/>
+        <SolidColorBrush x:Key="TransBlue" Color="#140040C8"/>
+        <SolidColorBrush x:Key="TransYellow" Color="#14C8B000"/>
+    </DockPanel.Resources>
+    <UniformGrid DockPanel.Dock="Bottom" Rows="1" Columns="3" Height="40">
+        <UniformGrid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
+        </UniformGrid.Resources>
+        <Button Name="NewLocalSource" Background="{StaticResource TransYellow}" BorderBrush="LightGray" Content="📁" ToolTip="Add Local Source" Click="NewLocalSource_Click"/>
+        <Button Name="NewWebSource" Background="{StaticResource TransBlue}" BorderBrush="LightGray" Content="🌎" ToolTip="Add Web Source" Click="NewWebSource_Click"/>
+        <Button Name="RemoveSource" Background="{StaticResource TransRed}" BorderBrush="LightGray" Content="🗑" ToolTip="Delete Selected" Click="RemoveSource_Click"/>
+    </UniformGrid>
+    <DockPanel Name="WebSourceInput" DockPanel.Dock="Bottom" Margin="4,1,4,1" Visibility="Collapsed">
+        <ComboBox Name="WebSourceSite" MinWidth="100" FontSize="14" VerticalContentAlignment="Center" SelectedIndex="0">
+            <ComboBoxItem Content="e621.net"/>
+        </ComboBox>
+        <Button Name="WebSourceConfirm" DockPanel.Dock="Right" Width="40" FontSize="14" VerticalContentAlignment="Center" Content="+" Click="WebSourceConfirm_Click"/>
+        <TextBox Name="WebSourceKeywords" Margin="1,0,1,0" FontSize="14" VerticalContentAlignment="Center" Text="Enter search keywords..." GotFocus="WebSourceKeywords_GotFocus" KeyDown="WebSourceKeywords_KeyDown"/>
+    </DockPanel>
+    <DockPanel DockPanel.Dock="Top" Margin="4,4,4,0">
+        <TextBlock DockPanel.Dock="Right" Width="80" TextAlignment="Center" Text="Subfolders"/>
+        <TextBlock DockPanel.Dock="Right" Width="80" TextAlignment="Center" Text="Active"/>
+        <TextBlock/>
+    </DockPanel>
+    <ListBox Name="SourceDisplay" Margin="0,4,0,0" BorderBrush="LightGray" ItemsSource="{Binding CurrentSources}" SelectionMode="Extended">
+        <ListBox.ItemContainerStyle>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            </Style>
+        </ListBox.ItemContainerStyle>
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <DockPanel Height="30">
+                    <CheckBox DockPanel.Dock="Right" Margin="0,0,24,0" VerticalAlignment="Center" IsEnabled="{Binding IsLocal}" IsChecked="{Binding IncludeSubfolders}"/>
+                    <CheckBox DockPanel.Dock="Right" Margin="0,0,64,0" VerticalAlignment="Center" IsChecked="{Binding IsActive}"/>
+                    <TextBlock FontSize="14" VerticalAlignment="Center" Text="{Binding Path}"/>
+                </DockPanel>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</DockPanel>
